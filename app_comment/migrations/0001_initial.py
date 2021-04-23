@@ -10,20 +10,19 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('app_tag', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ('app_answer', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Question',
+            name='Comment',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=250)),
                 ('text', models.TextField()),
                 ('create_date', models.DateTimeField()),
-                ('tags', models.ManyToManyField(related_name='questions', to='app_tag.Tag')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='questions', to=settings.AUTH_USER_MODEL)),
+                ('answer', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comments', to='app_answer.answer')),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comments', to=settings.AUTH_USER_MODEL)),
             ],
         ),
     ]

@@ -1,6 +1,8 @@
 from rest_framework import serializers
-from app_answer.serializers import CommentSerializers, AnswerSerializers
-from app_question.serializers import QuestionSerializers, BookmarkSerializers
+from app_answer.serializers import AnswerSerializers
+from app_bookmark.serializers import BookmarkSerializers
+from app_comment.serializers import CommentSerializers
+from app_question.serializers import QuestionSerializers
 from app_user.models import User
 
 

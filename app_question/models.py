@@ -14,13 +14,6 @@ class Question(models.Model):
         return self.title
 
 
-class Bookmark(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='bookmarks')
-    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='bookmarks')
-    create_date = models.DateTimeField()
-
-    def __str__(self):
-        return self.question.title
 
 
 

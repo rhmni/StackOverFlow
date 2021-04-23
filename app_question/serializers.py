@@ -1,11 +1,7 @@
 from rest_framework import serializers
-from .models import Question, Bookmark
 
-
-class BookmarkSerializers(serializers.ModelSerializer):
-    class Meta:
-        model = Bookmark
-        fields = '__all__'
+from app_bookmark.serializers import BookmarkSerializers
+from .models import Question
 
 
 class QuestionSerializers(serializers.ModelSerializer):
