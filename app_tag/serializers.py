@@ -12,4 +12,4 @@ class TagSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Tag
-        fields = ('name', 'users')
+        fields = '__all__'
