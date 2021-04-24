@@ -13,7 +13,7 @@ class ListUserView(APIView):
         return Response(data=srz_data.data, status=status.HTTP_200_OK)
 
 
-class CreateQuestionView(APIView):
+class CreateUserView(APIView):
     def post(self, request):
         srz_data = UserSerializer(data=request.data)
         if srz_data.is_valid():
@@ -23,7 +23,7 @@ class CreateQuestionView(APIView):
             return Response(data=srz_data.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class UpdateQuestionView(APIView):
+class UpdateUserView(APIView):
     def patch(self, request, pk):
         user = get_object_or_404(User, pk=pk)
         srz_data = UserSerializer(instance=user, data=request.data, partial=True)
@@ -34,7 +34,7 @@ class UpdateQuestionView(APIView):
             return Response(data=srz_data.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class DeleteQuestionView(APIView):
+class DeleteUserView(APIView):
     def delete(self, request, pk):
         user = get_object_or_404(User, pk=pk)
         user.delete()

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from app_answer.serializers import AnswerSerializers
+from app_answer.serializers import AnswerSerializer
 from app_bookmark.serializers import BookmarkSerializer
 from app_comment.serializers import CommentSerializer
 from app_question.serializers import QuestionSerializer
@@ -26,7 +26,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     def get_answers(self, obj):
         answers = obj.answers.all()
-        return AnswerSerializers(instance=answers, many=True).data
+        return AnswerSerializer(instance=answers, many=True).data
 
     class Meta:
         model = User
