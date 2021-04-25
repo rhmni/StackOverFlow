@@ -4,6 +4,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from app_user.models import User
 from app_user.serializers import UserSerializer
+from permissions import IsOwnerOrReadOnly
+from rest_framework.permissions import IsAuthenticated
 
 
 class ListUserView(APIView):
@@ -14,6 +16,8 @@ class ListUserView(APIView):
 
 
 class CreateUserView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def post(self, request):
         srz_data = UserSerializer(data=request.data)
         if srz_data.is_valid():
@@ -24,8 +28,11 @@ class CreateUserView(APIView):
 
 
 class UpdateUserView(APIView):
+    permission_classes = [IsOwnerOrReadOnly]
+
     def patch(self, request, pk):
         user = get_object_or_404(User, pk=pk)
+        self.check_object_permissions(request, user)
         srz_data = UserSerializer(instance=user, data=request.data, partial=True)
         if srz_data.is_valid():
             srz_data.save()
@@ -35,8 +42,11 @@ class UpdateUserView(APIView):
 
 
 class DeleteUserView(APIView):
+    permission_classes = [IsOwnerOrReadOnly]
+
     def delete(self, request, pk):
         user = get_object_or_404(User, pk=pk)
+        self.check_object_permissions(request, user)
         user.delete()
         return Response(data={'message': 'user deleted successfully!'}, status=status.HTTP_200_OK)
 
